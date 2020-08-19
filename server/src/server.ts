@@ -1,10 +1,16 @@
-import express, { request } from 'express'
+import express, { request, response } from 'express'
 import routes from './routes'
 import path from 'path'
+import cors from 'cors'
+
 
 const app = express();
+app.use(cors())
 app.use(routes)
 app.use(express.json())
-app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')))
+
+console.log(path.resolve(__dirname, 'uploads'));
+
+app.use('/uploads', express.static(path.resolve(__dirname, 'uploads')))
 
 app.listen(3333)
